@@ -22,35 +22,29 @@ class Regularity
 
   def start_with(*args)
     raise Regularity::Error.new('#start_with? called multiple times') unless @str.empty?
-    @str << '^[%s]' % interpret(*args)
-    self
+    write '^[%s]' % interpret(*args)
   end
 
   def append(*args)
-    @str << interpret(*args)
-    self
+    write interpret(*args)
   end
   alias_method :then, :append
 
   def end_with(*args)
-    @str << '%s$' % interpret(*args)
-    self
+    write '%s$' % interpret(*args)
   end
 
   def maybe(*args)
-    @str << '%s*' % interpret(*args)
-    self
+    write '%s*' % interpret(*args)
   end
 
   def one_of(ary)
-    @str << "[%s]" % ary.map { |c| escape(c) }.join('|')
-    self
+    write '[%s]' % ary.map { |c| escape(c) }.join('|')
   end
 
   def between(range, pattern)
     raise Regularity:Error.new('must provide an array of 2 integers') unless range.length == 2
-    @str << '%s{%s,%s}' % [interpret(pattern), range[0], range[1]]
-    self
+    write '%s{%s,%s}' % [interpret(pattern), range[0], range[1]]
   end
 
   def regex
@@ -66,7 +60,20 @@ class Regularity
     regex.respond_to?(meth) || super
   end
 
+  def to_s
+    "#<Regularity:#{object_id} pattern=/#{@str}/>"
+  end
+
+  def inspect
+    to_s
+  end
+
   private
+
+  def write(str)
+    @str << str
+    self
+  end
 
   # Translate/escape characters etc and return regex-ready string
   def interpret(*args)
