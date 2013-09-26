@@ -86,7 +86,7 @@ class Regularity
 
   # Ex: (2, 'x') or (3, :digits)
   def numbered_constraint(count, type)
-    pattern = escape translate(type)
+    pattern = patterned_constraint(type)
     raise Regularity::Error.new('Unrecognized pattern') if pattern.nil? || pattern.empty?
     '%s{%s}' % [pattern, count]
   end
