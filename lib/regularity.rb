@@ -61,7 +61,7 @@ class Regularity
   end
 
   def to_s
-    "#<Regularity:#{object_id} pattern=/#{@str}/>"
+    "#<Regularity:#{object_id} regex=/#{@str}/>"
   end
 
   def inspect
