@@ -12,22 +12,22 @@ describe Regularity do
   context '#start_with' do
     it 'matches basic characters' do
       re = Regularity.new.start_with('f')
-      re.get.should == /^[f]/
+      re.get.should == /^f/
     end
 
     it 'escapes special characters' do
       re = Regularity.new.start_with('.')
-      re.get.should == /^[\.]/
+      re.get.should == /^\./
     end
 
     it 'matches basic characters' do
       re = Regularity.new.start_with(3, 'x')
-      re.get.should == /^[x{3}]/
+      re.get.should == /^x{3}/
     end
 
     it 'matches special identifiers' do
       re = Regularity.new.start_with(2, :digits)
-      re.get.should == /^[[0-9]{2}]/
+      re.get.should == /^[0-9]{2}/
     end
   end
 
@@ -44,8 +44,8 @@ describe Regularity do
     end
 
     it 'also works as #then' do
-      re = Regularity.new.start_with('x').then('y').then('z')
-      re.get.should == /^[x]yz/
+      re = Regularity.new.start_with('x').maybe('y').then('z')
+      re.get.should == /^xy?z/
     end
 
     it 'escapes special characters' do
@@ -55,7 +55,12 @@ describe Regularity do
   end
 
   context '#maybe' do
-
+    it 'recognizes basic characters' do
+      re = Regularity.new.append('x').maybe('y').append('z')
+      re.regex.should == /xy?z/
+      (re =~ "xyz").should == 0
+      (re =~ "xz").should == 0
+    end
   end
 
   context '#one_of' do
@@ -83,37 +88,68 @@ describe Regularity do
       re.get.should == /x\$$/
     end
   end
-
   context '#regex' do
     it 'returns a well-formed regex' do
       re = Regularity.new.start_with('w').one_of(['x', 'y']).end_with('z')
-      re.regex.should == /^[w][x|y]z$/
+      re.regex.should == /^w[x|y]z$/
     end
   end
 
   context 'special identifiers' do
     it 'recognizes digits' do
-
+      re = Regularity.new.append(2, :digits)
+      re.regex.should == /[0-9]{2}/
     end
 
     it 'recognizes lowercase characters' do
-
+      re = Regularity.new.append(3, :lowercase)
+      re.regex.should == /[a-z]{3}/
     end
 
     it 'recognizes uppercase characters' do
+      re = Regularity.new.append(3, :uppercase)
+      re.regex.should == /[A-Z]{3}/
 
     end
 
     it 'recognizes alphanumeric characters' do
-
+      re = Regularity.new.append(3, :alphanumeric)
+      re.regex.should == /[A-Za-z0-9]{3}/
     end
 
     it 'recognizes spaces' do
+      re = Regularity.new.append(4, :spaces)
+      re.regex.should == / {4}/
+    end
 
+    it 'recognizes whitespace' do
+      re = Regularity.new.append(2, :whitespaces)
+      re.regex.should == /\s{2}/
     end
 
     it 'recognizes tabs' do
+      re = Regularity.new.append(1, :tab)
+      re.regex.should == /\t{1}/
+    end
+  end
 
+  context 'examples' do
+    specify do
+      re = Regularity.new
+            .start_with(3, :digits)
+            .then('-')
+            .then(2, :letters)
+            .maybe('#')
+            .one_of(['a','b'])
+            .between([2,4], 'c')
+            .end_with('$')
+
+      re.regex.should == /^[0-9]{3}-[A-Za-z]{2}#?[a|b]c{2,4}\$$/
+
+      (re =~ "123-xy#accc$").should == 0
+      (re =~ "999-dfbcc$").should == 0
+      (re =~ "000-df#baccccccccc$").should be_nil
+      (re =~ "444-dd3ac$").should be_nil
     end
   end
 end

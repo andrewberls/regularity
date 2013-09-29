@@ -5,11 +5,12 @@ class Regularity
   PATTERNS = {
     'digit'        => '[0-9]',
     'lowercase'    => '[a-z]',
-    'uppercase'    => '[A-Za-z]',
+    'uppercase'    => '[A-Z]',
     'letter'       => '[A-Za-z]',
     'alphanumeric' => '[A-Za-z0-9]',
-    'space'        => '\s', # TODO
-    'tab'          => '\t'  # TODO
+    'whitespace'   => '\s',
+    'space'        => ' ',
+    'tab'          => '\t'
   }
 
   ESCAPED_CHARS = %w(
@@ -22,7 +23,7 @@ class Regularity
 
   def start_with(*args)
     raise Regularity::Error.new('#start_with? called multiple times') unless @str.empty?
-    write '^[%s]' % interpret(*args)
+    write '^%s' % interpret(*args)
   end
 
   def append(*args)
@@ -35,7 +36,7 @@ class Regularity
   end
 
   def maybe(*args)
-    write '%s*' % interpret(*args)
+    write '%s?' % interpret(*args)
   end
 
   def one_of(ary)
@@ -51,6 +52,10 @@ class Regularity
     Regexp.new(@str)
   end
   alias_method :get, :regex
+
+  def =~(other)
+    regex.=~(other)
+  end
 
   def method_missing(meth, *args, &block)
     regex.send(meth, *args, &block)
