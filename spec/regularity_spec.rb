@@ -77,6 +77,30 @@ describe Regularity do
     end
   end
 
+  context 'zero_or_more' do
+    it 'recognizes basic characters' do
+      re = Regularity.new.zero_or_more('a').then('b')
+      re.get.should == /a*b/
+    end
+
+    it 'recognizes special identifiers' do
+      re = Regularity.new.zero_or_more(:digits)
+      re.get.should == /[0-9]*/
+    end
+  end
+
+  context 'one_or_more' do
+    it 'recognizes basic characters' do
+      re = Regularity.new.one_or_more('a').then('b')
+      re.get.should == /a+b/
+    end
+
+    it 'recognizes special identifiers' do
+      re = Regularity.new.one_or_more(:letters)
+      re.get.should == /[A-Za-z]+/
+    end
+  end
+
   context '#end_with' do
     it 'matches basic characters' do
       re = Regularity.new.append('x').end_with('y')
@@ -88,6 +112,7 @@ describe Regularity do
       re.get.should == /x\$$/
     end
   end
+
   context '#regex' do
     it 'returns a well-formed regex' do
       re = Regularity.new.start_with('w').one_of(['x', 'y']).end_with('z')

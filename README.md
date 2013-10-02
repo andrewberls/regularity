@@ -1,6 +1,6 @@
 ## Regularity - Regular expressions for humans
 
-Regularity is a friendly regular expression builder for Ruby. Regular expressions are a powerful way of 
+Regularity is a friendly regular expression builder for Ruby. Regular expressions are a powerful way of
 pattern-matching against text, but too often they are 'write once, read never'. After all, who wants to try and deciper
 
 ```ruby
@@ -36,7 +36,7 @@ on them and it will just work <sup>TM</sup>
 
 ### DSL methods
 
-Most methods accept the same pattern signature - you can either specify a patterned constraint such as `then("xyz")`, 
+Most methods accept the same pattern signature - you can either specify a patterned constraint such as `then("xyz")`,
 or a numbered constraint such as `then(2, :digits)`. The following special identifers are supported:
 
 ````
@@ -67,6 +67,10 @@ The following methods are supported:
 
 `between(range, pattern)`: Specify a bounded repetition, e.g. `between([2,4], :digits)`
 
+`zero_or_more(pattern)`: Specify that the pattern or identifer should appear zero or many times
 
-The DSL methods are chainable, meaning they return `self`. You can also call `regex` on a Regularity object to 
+`one_or_more(pattern)`: Specify that the pattern or identifer should appear one or many times
+
+
+The DSL methods are chainable, meaning they return `self`. You can also call `regex` on a Regularity object to
 return a RegExp object created from the specified pattern.
