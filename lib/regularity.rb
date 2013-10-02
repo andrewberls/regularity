@@ -23,7 +23,7 @@ class Regularity
 
   def start_with(*args)
     raise Regularity::Error.new('#start_with? called multiple times') unless @str.empty?
-    write '^%s' % interpret(*args)
+    write '^%s', args
   end
 
   def append(*args)
@@ -32,11 +32,11 @@ class Regularity
   alias_method :then, :append
 
   def end_with(*args)
-    write '%s$' % interpret(*args)
+    write '%s$', args
   end
 
   def maybe(*args)
-    write '%s?' % interpret(*args)
+    write '%s?', args
   end
 
   def one_of(ary)
@@ -49,11 +49,11 @@ class Regularity
   end
 
   def zero_or_more(pattern)
-    write '%s*' % interpret(pattern)
+    write '%s*', pattern
   end
 
   def one_or_more(pattern)
-    write '%s+' % interpret(pattern)
+    write '%s+', pattern
   end
 
   def regex
@@ -83,8 +83,8 @@ class Regularity
 
   private
 
-  def write(str)
-    @str << str
+  def write(str, args=nil)
+    @str << (args.nil? ? str : str % interpret(*args))
     self
   end
 
