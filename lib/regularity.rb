@@ -62,7 +62,7 @@ class Regularity
   alias_method :get, :regex
 
   def =~(other)
-    regex.=~(other)
+    regex =~ other
   end
 
   def method_missing(meth, *args, &block)
