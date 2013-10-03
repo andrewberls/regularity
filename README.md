@@ -74,3 +74,6 @@ The following methods are supported:
 
 The DSL methods are chainable, meaning they return `self`. You can also call `regex` on a Regularity object to
 return a RegExp object created from the specified pattern.
+
+### Status
+[![Build Status](https://travis-ci.org/andrewberls/regularity.png)](https://travis-ci.org/andrewberls/regularity)
