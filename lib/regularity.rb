@@ -48,6 +48,10 @@ class Regularity
     write '%s{%s,%s}' % [interpret(pattern), range[0], range[1]]
   end
 
+  def range(range)
+    write '[%s]' % range
+  end
+
   def zero_or_more(pattern)
     write '%s*', pattern
   end
@@ -64,7 +68,7 @@ class Regularity
   def =~(other)
     regex =~ other
   end
-  
+
   def reset
     @str = ''
   end

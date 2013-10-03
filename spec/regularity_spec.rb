@@ -72,6 +72,13 @@ describe Regularity do
     end
   end
 
+  context '#range' do
+    it 'recognizes arbitrary ranges' do
+      re.range('0-9A-C')
+      re.get.should == /[0-9A-C]/
+    end
+  end
+
   context '#between' do
     it 'creates a bounded repetition' do
       re.between([2,4], 'x')
