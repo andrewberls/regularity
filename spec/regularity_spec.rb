@@ -160,14 +160,14 @@ describe Regularity do
 
   context 'examples' do
     specify do
-      re = Regularity.new
-            .start_with(3, :digits)
-            .then('-')
-            .then(2, :letters)
-            .maybe('#')
-            .one_of(['a','b'])
-            .between([2,4], 'c')
-            .end_with('$')
+      re = Regularity.new.
+            start_with(3, :digits).
+            then('-').
+            then(2, :letters).
+            maybe('#').
+            one_of(['a','b']).
+            between([2,4], 'c').
+            end_with('$')
 
       re.regex.should == /^[0-9]{3}-[A-Za-z]{2}#?[a|b]c{2,4}\$$/
 
