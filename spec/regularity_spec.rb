@@ -77,6 +77,20 @@ describe Regularity do
     end
   end
 
+  context '#at_least' do
+	it 'creates a repetition of n times at least' do
+      re = Regularity.new.at_least(3, 'x')
+      re.get.should == /x{3,}/
+    end
+  end
+
+  context '#at_most' do
+	it 'creates a repetition of n times at most' do
+      re = Regularity.new.at_most(3, 'x')
+      re.get.should == /x{,3}/
+    end
+  end
+
   context 'zero_or_more' do
     it 'recognizes basic characters' do
       re = Regularity.new.zero_or_more('a').then('b')
