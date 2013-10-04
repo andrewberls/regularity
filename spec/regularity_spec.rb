@@ -75,6 +75,11 @@ describe Regularity do
       re = Regularity.new.between([2,4], 'x')
       re.get.should == /x{2,4}/
     end
+
+	it 'creates a half closed interval' do
+      re = Regularity.new.between([nil,3], 'x')
+      re.get.should == /x{,3}/
+    end
   end
 
   context 'zero_or_more' do

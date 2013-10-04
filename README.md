@@ -65,7 +65,7 @@ The following methods are supported:
 
 `one_of(values)`: Specify an alternation, e.g. `one_of(['a', 'b', 'c'])`
 
-`between(range, pattern)`: Specify a bounded repetition, e.g. `between([2,4], :digits)`
+`between(range, pattern)`: Specify a bounded repetition, e.g. `between([2,4], :digits)`, `between([3, nil], :letters)` for 3 or more times
 
 `zero_or_more(pattern)`: Specify that the pattern or identifer should appear zero or many times
 
