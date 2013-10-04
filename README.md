@@ -65,12 +65,15 @@ The following methods are supported:
 
 `one_of(values)`: Specify an alternation, e.g. `one_of(['a', 'b', 'c'])`
 
-`between(range, pattern)`: Specify a bounded repetition, e.g. `between([2,4], :digits)`, `between([3, nil], :letters)` for 3 or more times
+`between(range, pattern)`: Specify a bounded repetition, e.g. `between([2,4], :digits)`
 
 `zero_or_more(pattern)`: Specify that the pattern or identifer should appear zero or many times
 
 `one_or_more(pattern)`: Specify that the pattern or identifer should appear one or many times
 
+`at_least(n, pattern)`: Specify that the pattern or identifer should appear n or more times
+
+`at_most(n, pattern)`: Specify that the pattern or identifer should appear n or less times
 
 The DSL methods are chainable, meaning they return `self`. You can also call `regex` on a Regularity object to
 return a RegExp object created from the specified pattern.

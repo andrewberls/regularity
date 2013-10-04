@@ -75,9 +75,18 @@ describe Regularity do
       re = Regularity.new.between([2,4], 'x')
       re.get.should == /x{2,4}/
     end
+  end
 
-	it 'creates a half closed interval' do
-      re = Regularity.new.between([nil,3], 'x')
+  context '#at_least' do
+	it 'creates a repetition of n times at least' do
+      re = Regularity.new.at_least(3, 'x')
+      re.get.should == /x{3,}/
+    end
+  end
+
+  context '#at_most' do
+	it 'creates a repetition of n times at most' do
+      re = Regularity.new.at_most(3, 'x')
       re.get.should == /x{,3}/
     end
   end

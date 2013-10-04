@@ -48,6 +48,14 @@ class Regularity
     write '%s{%s,%s}' % [interpret(pattern), range[0], range[1]]
   end
 
+  def at_least(times, pattern)
+    between [times, nil], pattern
+  end
+
+  def at_most(times, pattern)
+    between [nil, times], pattern
+  end
+
   def zero_or_more(pattern)
     write '%s*', pattern
   end
