@@ -44,8 +44,16 @@ class Regularity
   end
 
   def between(range, pattern)
-    raise Regularity:Error.new('must provide an array of 2 integers') unless range.length == 2
+    raise Regularity:Error.new('must provide an array of 2 elements, one of them must be an integer') unless range.length == 2 && range.any? { |element| element.is_a? Integer }
     write '%s{%s,%s}' % [interpret(pattern), range[0], range[1]]
+  end
+
+  def at_least(times, pattern)
+    between [times, nil], pattern
+  end
+
+  def at_most(times, pattern)
+    between [nil, times], pattern
   end
 
   def zero_or_more(pattern)

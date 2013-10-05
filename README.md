@@ -71,6 +71,9 @@ The following methods are supported:
 
 `one_or_more(pattern)`: Specify that the pattern or identifer should appear one or many times
 
+`at_least(n, pattern)`: Specify that the pattern or identifer should appear n or more times
+
+`at_most(n, pattern)`: Specify that the pattern or identifer should appear n or less times
 
 The DSL methods are chainable, meaning they return `self`. You can also call `regex` on a Regularity object to
 return a RegExp object created from the specified pattern.
