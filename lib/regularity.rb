@@ -64,10 +64,6 @@ class Regularity
   def =~(other)
     regex =~ other
   end
-  
-  def reset
-    @str = ''
-  end
 
   def method_missing(meth, *args, &block)
     regex.send(meth, *args, &block)
