@@ -54,6 +54,12 @@ describe Regularity do
       re.between([0,2], :digits).then('.').end_with('$')
       re.get.should == /[0-9]{0,2}\.\$$/
     end
+
+    it 'raises an error after ending' do
+      expect do
+        re.end_with('x').append('y')
+      end.to raise_error(Regularity::Error)
+    end
   end
 
   context '#maybe' do
@@ -126,6 +132,12 @@ describe Regularity do
     it 'escapes special characters' do
       re.append('x').end_with('$')
       re.get.should == /x\$$/
+    end
+
+    it 'raises an error when called twice' do
+      expect do
+        re.end_with('x').end_with('x')
+      end.to raise_error(Regularity::Error)
     end
   end
 
