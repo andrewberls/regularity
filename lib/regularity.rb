@@ -19,6 +19,7 @@ class Regularity
 
   def initialize
     @str = ''
+    @ended = false
   end
 
   def start_with(*args)
@@ -33,6 +34,8 @@ class Regularity
 
   def end_with(*args)
     write '%s$', args
+    @ended = true
+    self
   end
 
   def maybe(*args)
@@ -92,6 +95,7 @@ class Regularity
   private
 
   def write(str, args=nil)
+    raise Regularity::Error.new('#end_with has already been called') if @ended
     @str << (args.nil? ? str : str % interpret(*args))
     self
   end
