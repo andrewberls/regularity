@@ -70,6 +70,13 @@ describe Regularity do
       (re =~ "xz").should == 0
     end
   end
+  
+  context '#not' do
+    it 'creates a negative lookahead' do
+      re.append('x').not('y').append('z')
+      re.regex.should == /x(?!y)z
+    end
+  end
 
   context '#one_of' do
     it 'creates an alternation' do
