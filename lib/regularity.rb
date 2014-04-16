@@ -41,6 +41,10 @@ class Regularity
   def maybe(*args)
     write '%s?', args
   end
+  
+  def not(*args)
+    write '(?!%s)', args
+  end
 
   def one_of(ary)
     write '[%s]' % ary.map { |c| escape(c) }.join('|')
