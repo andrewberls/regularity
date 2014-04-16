@@ -75,6 +75,8 @@ describe Regularity do
     it 'creates a negative lookahead' do
       re.append('x').not('y').append('z')
       re.regex.should == /x(?!y)z
+      (re =~ "xzabc").should == 0
+      (re =~ "xyzabc").should be_nil
     end
   end
 
