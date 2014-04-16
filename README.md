@@ -63,6 +63,8 @@ The following methods are supported:
 
 `maybe(pattern)`: Zero or one of the specified pattern
 
+`not(pattern)`: Specify a negative lookahead, i.e. something not followed by the specified pattern
+
 `one_of(values)`: Specify an alternation, e.g. `one_of(['a', 'b', 'c'])`
 
 `between(range, pattern)`: Specify a bounded repetition, e.g. `between([2,4], :digits)`
