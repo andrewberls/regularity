@@ -6,6 +6,7 @@ pattern-matching against text, but too often they are 'write once, read never'. 
 ```ruby
 /^[0-9]{3}-[A-Za-z]{2}#?[a|b]a{2,4}\$$/
 ```
+https://travis-ci.org/ferdinandrosario/regularity.svg
 
 when you could express it as:
 
