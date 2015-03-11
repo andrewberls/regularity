@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ferdinandrosario/regularity.svg)](https://travis-ci.org/ferdinandrosario/regularity)
+
 ## Regularity - Regular expressions for humans
 
 Regularity is a friendly regular expression builder for Ruby. Regular expressions are a powerful way of

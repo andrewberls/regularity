@@ -3,5 +3,7 @@ rvm:
   - 1.8.7
   - 1.9.3
   - 2.0.0
-script: 
+  - 2.1.5
+  - 2.2.1
+script:
   - bundle exec rspec
