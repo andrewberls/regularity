@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ferdinandrosario/regularity.svg)](https://travis-ci.org/ferdinandrosario/regularity)
+
 ## Regularity - Regular expressions for humans
 
 Regularity is a friendly regular expression builder for Ruby. Regular expressions are a powerful way of
@@ -6,7 +8,6 @@ pattern-matching against text, but too often they are 'write once, read never'. 
 ```ruby
 /^[0-9]{3}-[A-Za-z]{2}#?[a|b]a{2,4}\$$/
 ```
-https://travis-ci.org/ferdinandrosario/regularity.svg
 
 when you could express it as:
 
