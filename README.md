@@ -39,7 +39,7 @@ on them and it will just work <sup>TM</sup>
 Most methods accept the same pattern signature - you can either specify a patterned constraint such as `then("xyz")`,
 or a numbered constraint such as `then(2, :digits)`. The following special identifers are supported:
 
-````
+```
 :digit        => '[0-9]'
 :lowercase    => '[a-z]'
 :uppercase    => '[A-Z]'
